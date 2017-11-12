@@ -5,7 +5,15 @@ import zope.sqlalchemy
 
 # import or define all models here to ensure they are attached to the
 # Base.metadata prior to any initialization routines
-from .mymodel import MyModel  # flake8: noqa
+from .product import Product
+from .purchase_product import PurchaseProduct
+from .purchase import Purchase
+from .receipt import Receipt
+from .sell_product import SellProduct
+from .sell import Sell
+from .stock import Stock
+from .stocktaking import Stocktaking
+from .user import User
 
 # run configure_mappers after defining all of the models to ensure
 # all relationships can be setup
@@ -35,7 +43,8 @@ def get_tm_session(session_factory, transaction_manager):
     - When using scripts you should wrap the session in a manager yourself.
       For example::
 
-          import transaction
+          from
+         transaction
 
           engine = get_engine(settings)
           session_factory = get_session_factory(engine)
