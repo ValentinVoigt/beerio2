@@ -6,9 +6,11 @@ Technologies
 
 - WTForms + WTForms-Alchemy
 - factory_boy + Faker
-- npm
 - Bootstrap
 - Angular / React?
+- npm with nodeenv
+  -> pip install nodeenv
+  -> nodeenv -p
 
 Getting Started
 ---------------
