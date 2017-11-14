@@ -1,12 +1,24 @@
 import unittest
 import transaction
+import factory
 
+from datetime import datetime
+from beverages import models
 from pyramid import testing
+from webob.multidict import MultiDict
 
+class UserFactory(factory.Factory):
 
-def dummy_request(dbsession):
-    return testing.DummyRequest(dbsession=dbsession)
+    class Meta:
+        model = models.User
 
+    created_at = factory.LazyFunction(datetime.now)
+    first_name = factory.Faker('first_name')
+    last_name = factory.Faker('last_name')
+    email = factory.Faker('email')
+    balance = 0
+    guarantee = 0
+    active = True
 
 class BaseTest(unittest.TestCase):
     def setUp(self):
@@ -44,22 +56,31 @@ class TestMyViewSuccessCondition(BaseTest):
     def setUp(self):
         super(TestMyViewSuccessCondition, self).setUp()
         self.init_database()
+        self.add_fixtures()
 
-        from .models import MyModel
+    def add_fixtures(self):
+        self.session.add(UserFactory())
 
-        model = MyModel(name='one', value=55)
-        self.session.add(model)
+    def test_sql(self):
+        all_users = self.session.query(models.User).all()
+        assert len(all_users) == 1
 
-    def test_passing_view(self):
+    def test_form_fail(self):
         from .views.default import my_view
-        info = my_view(dummy_request(self.session))
-        self.assertEqual(info['one'].name, 'one')
-        self.assertEqual(info['project'], 'O2 Getränkeverkauf')
+        request = testing.DummyRequest(dbsession=self.session, post=MultiDict())
+        info = my_view(request)
+        self.assertFalse(info['form'].validate())
 
-
-class TestMyViewFailureCondition(BaseTest):
-
-    def test_failing_view(self):
+    def test_form_okay(self):
         from .views.default import my_view
-        info = my_view(dummy_request(self.session))
-        self.assertEqual(info.status_int, 500)
+        request = testing.DummyRequest(
+            dbsession=self.session,
+            post=MultiDict([
+                ('name', 'Asdf'),
+                ('company', ''),
+                ('volume_ml', '500'),
+            ]),
+        )
+        info = my_view(request)
+        self.assertTrue(info['form'].validate())
+        self.assertEqual(info['form'].data['volume_ml'], 500)

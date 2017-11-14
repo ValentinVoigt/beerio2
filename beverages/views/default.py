@@ -17,6 +17,9 @@ class ProductForm(ModelForm):
 @view_config(route_name='home', renderer='beverages:templates/mytemplate.mako')
 def my_view(request):
     form = ProductForm(request.POST)
+    result = {'form': form}
+
     if request.method == 'POST' and form.validate():
-        print(form.data)
-    return {'form': form}
+        result['data'] = form.data
+
+    return result
