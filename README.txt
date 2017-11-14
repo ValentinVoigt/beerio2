@@ -4,13 +4,18 @@ O2 Getränkeverkauf
 Technologies
 ------------
 
+Backend:
 - WTForms + WTForms-Alchemy
 - factory_boy + Faker
+
+Frontend:
 - Bootstrap
 - Angular / React?
 - npm with nodeenv
   -> pip install nodeenv
   -> nodeenv -p
+- Webpack
+- Font Awesome
 
 Getting Started
 ---------------
