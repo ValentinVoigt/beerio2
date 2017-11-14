@@ -1,6 +1,15 @@
 O2 Getränkeverkauf
 ==================
 
+Technologies
+------------
+
+- WTForms + WTForms-Alchemy
+- factory_boy + Faker
+- npm
+- Bootstrap
+- Angular / React?
+
 Getting Started
 ---------------
 
