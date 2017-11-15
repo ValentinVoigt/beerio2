@@ -28,22 +28,30 @@ Getting Started
 
     python3 -m venv env
 
+- Enter der virtual environment
+
+    source en/bin/activate
+
 - Upgrade packaging tools.
 
-    env/bin/pip install --upgrade pip setuptools
+    pip install --upgrade pip setuptools
 
 - Install the project in editable mode with its testing requirements.
 
-    env/bin/pip install -e ".[testing]"
+    pip install -e ".[testing]"
+
+- Install NodeJS environment inside your virtualenv
+
+    nodeenv -p
 
 - Configure the database.
 
-    env/bin/initialize_beerio2_db development.ini
+    initialize_beerio2_db development.ini
 
 - Run your project's tests.
 
-    env/bin/pytest
+    pytest
 
 - Run your project.
 
-    env/bin/pserve development.ini
+    pserve development.ini
