@@ -3,7 +3,7 @@ import transaction
 import factory
 
 from datetime import datetime
-from beverages import models
+from beerio2 import models
 from pyramid import testing
 from webob.multidict import MultiDict
 

@@ -29,7 +29,7 @@ tests_require = [
 ]
 
 setup(
-    name='beverages',
+    name='beerio2',
     version='0.0',
     description='O2 Getränkeverkauf',
     long_description=README + '\n\n' + CHANGES,
@@ -52,10 +52,10 @@ setup(
     install_requires=requires,
     entry_points={
         'paste.app_factory': [
-            'main = beverages:main',
+            'main = beerio2:main',
         ],
         'console_scripts': [
-            'initialize_beverages_db = beverages.scripts.initializedb:main',
+            'initialize_beerio2_db = beerio2.scripts.initializedb:main',
         ],
     },
 )

@@ -19,6 +19,6 @@ Data.fs*
 .DS_Store
 coverage
 test
-beverages.sqlite
+beerio2.sqlite
 node_modules/
 .cache/

@@ -62,7 +62,7 @@ def includeme(config):
     """
     Initialize the model for a Pyramid app.
 
-    Activate this setup using ``config.include('beverages.models')``.
+    Activate this setup using ``config.include('beerio2.models')``.
 
     """
     settings = config.get_settings()

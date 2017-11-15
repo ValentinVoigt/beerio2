@@ -22,7 +22,7 @@ Getting Started
 
 - Change directory into your newly created project.
 
-    cd beverages
+    cd beerio2
 
 - Create a Python virtual environment.
 
@@ -38,7 +38,7 @@ Getting Started
 
 - Configure the database.
 
-    env/bin/initialize_beverages_db development.ini
+    env/bin/initialize_beerio2_db development.ini
 
 - Run your project's tests.
 
