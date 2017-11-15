@@ -3,12 +3,12 @@ import zope.sqlalchemy
 
 # import or define all models here to ensure they are attached to the
 # Base.metadata prior to any initialization routines
-from .product import Product
-from .purchase_product import PurchaseProduct
-from .purchase import Purchase
+from .product import Product, ProductFactory
+from .purchase_product import PurchaseProduct, PurchaseProductFactory
+from .purchase import Purchase, PurchaseFactory
 from .receipt import Receipt, ReceiptFactory
-from .sell_product import SellProduct
-from .sell import Sell
+from .sell_product import SellProduct, SellProductFactory
+from .sell import Sell, SellFactory
 from .stock import Stock
 from .stocktaking import Stocktaking
 from .user import User, UserFactory

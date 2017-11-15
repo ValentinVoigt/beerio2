@@ -1,6 +1,10 @@
+import factory
+
 from sqlalchemy_defaults import Column
 from sqlalchemy import ForeignKey, Integer, Numeric
 from sqlalchemy.orm import relationship
+
+from decimal import Decimal
 
 from .meta import Base
 
@@ -16,3 +20,14 @@ class SellProduct(Base):
 
     product = relationship('Product')
     sell = relationship('Sell', backref='sell_products')
+
+class SellProductFactory(factory.Factory):
+
+    class Meta:
+        model = SellProduct
+
+    price = factory.Iterator([
+        Decimal("0.99"),
+        Decimal("1.84"),
+        Decimal("0.70"),
+    ])

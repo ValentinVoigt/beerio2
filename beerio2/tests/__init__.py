@@ -40,7 +40,33 @@ class BaseTest(unittest.TestCase):
         # receipts
         for user in users[:10]:
             user.add_receipt(models.ReceiptFactory(amount_guarantee=50))
-            user.add_receipt(models.ReceiptFactory(amount_balance=random.randint(1, 20)*5))
+            user.add_receipt(models.ReceiptFactory(amount_balance=random.randint(4, 20)*5))
+
+        # products
+        products = models.ProductFactory.create_batch(size=8)
+        self.session.add_all(products)
+
+        # buy some products
+        purchase = models.PurchaseFactory()
+        ppf = models.PurchaseProductFactory
+        self.session.add_all([
+            ppf(purchase=purchase, product=products[0]),
+            ppf(purchase=purchase, product=products[1]),
+            ppf(purchase=purchase, product=products[2]),
+        ])
+
+        # sell some products
+        sells = [models.SellFactory(user=users[i]) for i in range(0, 3)]
+        spf = models.SellProductFactory
+        self.session.add_all([
+            spf(sell=sells[0], product=products[0], num_bottles=1),
+            spf(sell=sells[1], product=products[1], num_bottles=2),
+            spf(sell=sells[2], product=products[2], num_bottles=1),
+            spf(sell=sells[2], product=products[0], num_bottles=3),
+        ])
+        for sell in sells:
+            sell.user.add_sell(sell)
+
 
     def tearDown(self):
         testing.tearDown()

@@ -27,6 +27,10 @@ class User(Base):
         self.balance += receipt.amount_balance
         self.guarantee += receipt.amount_guarantee
 
+    def add_sell(self, sell):
+        sell.user = self
+        self.balance -= sell.price
+
 class UserFactory(factory.Factory):
 
     class Meta:

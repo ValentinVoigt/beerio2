@@ -1,8 +1,9 @@
 from pyramid import testing
 from webob.multidict import MultiDict
+from sqlalchemy import func
 
 from . import BaseTest
-from beerio2.models import User
+from beerio2.models import User, Product, PurchaseProduct, PurchaseProduct
 
 class TestBasicDatabaseInvariants(BaseTest):
 
@@ -22,6 +23,18 @@ class TestBasicDatabaseInvariants(BaseTest):
             assert user.balance == balance_receipts - sell_prices
             assert user.guarantee == guarantee_receipts 
 
+    def test_products(self):
+        products = self.session.query(Product).all()
+        assert len(products) == 8
+
+    def test_purchases(self):
+        total_bottles, total_crates = self.session.query(
+            func.sum(PurchaseProduct.num_bottles),
+            func.sum(PurchaseProduct.num_crates),
+        ).one()
+        assert total_bottles == 44
+        assert total_crates == 6
+
     def test_form_fail(self):
         from ..views.default import my_view
         request = testing.DummyRequest(dbsession=self.session, post=MultiDict())
@@ -38,6 +51,6 @@ class TestBasicDatabaseInvariants(BaseTest):
                 ('volume_ml', '500'),
             ]),
         )
-        info = my_view(request)
-        assert info['form'].validate()
-        assert info['form'].data['volume_ml'] == 500
+        form = my_view(request)['form']
+        assert form.validate(), form.errors
+        assert form.data['volume_ml'] == 500
