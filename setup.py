@@ -9,6 +9,7 @@ with open(os.path.join(here, 'CHANGES.txt')) as f:
     CHANGES = f.read()
 
 requires = [
+    'factory_boy',
     'nodeenv',
     'plaster_pastedeploy',
     'pyramid >= 1.9a',
@@ -18,6 +19,7 @@ requires = [
     'pyramid_tm',
     'sqlalchemy',
     'sqlalchemy_defaults',
+    'sqlalchemy_repr',
     'transaction',
     'waitress',
     'wtforms',
@@ -27,10 +29,8 @@ requires = [
 
 tests_require = [
     'WebTest >= 1.3.1',  # py3 compat
-    'factory_boy',
     'pytest',
     'pytest-cov',
-    'sqlalchemy_repr',
 ]
 
 setup(

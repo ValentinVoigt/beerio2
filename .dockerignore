@@ -1,0 +1,6 @@
+*.egg
+*.egg-info
+**/*.pyc
+**/__pycache__
+beerio2.sqlite
+node_modules

@@ -22,3 +22,4 @@ test
 beerio2.sqlite
 node_modules/
 .cache/
+__pycache__
